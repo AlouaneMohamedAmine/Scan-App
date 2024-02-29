@@ -1,4 +1,13 @@
 {
+  "name": "scan-app",
+  "version": "1.0.0",
+  "scripts": {
+    "setup": "npm i && husky install && npm --prefix ./front i && npm --prefix ./back i",
+    "migrate": "cd back/ && node migrate.js && cd ..",
+    "dev": "concurrently -n frontend,backend -c green,yellow -t \"HH:mm:ss\" -p \"{name} {time}\" \"npm --prefix ./front run dev\" \"npm --prefix ./back run dev\"",
+    "dev-front": "npm --prefix ./front run dev",
+    "dev-back": "npm --prefix ./back run dev"
+},
   "dependencies": {
     "dotenv": "^16.4.5"
   }
