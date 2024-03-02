@@ -28,6 +28,7 @@ const models = fs
   .readdirSync(__dirname)
   .filter((file) => file !== "AbstractManager.js" && file !== "index.js")
   .reduce((acc, file) => {
+    console.log(file);
     const Manager = require(path.join(__dirname, file));
 
     const managerInstance = new Manager();

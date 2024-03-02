@@ -41,9 +41,9 @@ DROP TABLE IF EXISTS `Chapters`;
 CREATE TABLE IF NOT EXISTS `Chapters` (
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
     `chapter` TEXT,
-    `work_id` INT NOT NULL,
+    `manhwa_id` INT NOT NULL,
     `views` INT DEFAULT 0,
-    FOREIGN KEY (`work_id`) REFERENCES Works(`id`)
+    FOREIGN KEY (`manhwa_id`) REFERENCES Manhwa(`id`)
 )
 ENGINE = InnoDB;
 
