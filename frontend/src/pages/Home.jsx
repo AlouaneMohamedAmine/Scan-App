@@ -1,7 +1,9 @@
+
 function Home() {
     return (
-      <div>bakhaw</div>
-    );
+ <div className="bg-black">
+     Home
+ </div>    );
   }
   
   export default Home;
