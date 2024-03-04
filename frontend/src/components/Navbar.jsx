@@ -1,8 +1,9 @@
-
 function Navbar() {
-    return (
-  <div className="bg">aaaaaaaaaaaaaa</div>
-    );
+ 
+
+  return (
+    <div>aaaaaaaaaaaaaaaa</div>
+  );
   }
   
   export default Navbar;
