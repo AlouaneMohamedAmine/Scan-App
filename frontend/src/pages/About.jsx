@@ -1,8 +1,10 @@
- 
+import Navbar from "../components/Navbar"
+
 function About() {
     return (
  <div>
-    About
+          <Navbar/> 
+ 
  </div>    );
   }
   

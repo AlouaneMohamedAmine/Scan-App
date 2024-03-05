@@ -7,7 +7,7 @@ import ProfilePage from "../pages/ProfilePage";
 import WebtoonPage from "../pages/WebtoonPage";
 import ChapterPage from "../pages/ChapterPage";
 import About from "../pages/About";
-import Notfound from "../pages/Notfound";
+import ErrorPage from "../pages/ErrorPage";
 import Browse from "../pages/Browse";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
@@ -21,7 +21,7 @@ const allRoutes = [
       { path: "/profile/library", component: <Library />},
       { path: "/profile", component: <ProfilePage />},
       { path: "/about", component: <About />},
-      { path: "/*", component: <Notfound />},
+      { path: "/*", component: <ErrorPage />},
       { path: "/login", component: <LoginPage />},
       { path: "/register", component: <RegisterPage />},
     ];
