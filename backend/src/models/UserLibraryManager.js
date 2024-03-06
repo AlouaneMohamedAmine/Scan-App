@@ -2,7 +2,7 @@ const AbstractManager = require("./AbstractManager");
 
 class Userlibrary extends AbstractManager {
   constructor() {
-    super({ table: "UserLibrary" });
+    super({ table: "userlibrary" });
   }
 
   insertFav(favorite) {

@@ -2,7 +2,7 @@ const AbstractManager = require("./AbstractManager");
 
 class ChaptersManager extends AbstractManager {
   constructor() {
-    super({ table: "Chapters" });
+    super({ table: "chapters" });
   }
 
   getChapter(chapterId) {

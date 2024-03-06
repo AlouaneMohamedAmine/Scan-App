@@ -2,7 +2,7 @@ const AbstractManager = require("./AbstractManager");
 
 class ManhwaManager extends AbstractManager {
   constructor() {
-    super({ table: "Manhwa" });
+    super({ table: "manhwa" });
   }
 
   find(id) {

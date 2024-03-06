@@ -2,7 +2,7 @@ const models = require("../models");
 
 // Récupère le style du site
 const getStyle = (req, res) => {
-  models.WebsiteStyleManager.getStyle()
+  models.websitestyle.getStyle()
     .then(([results]) => {
       res.send(results);
     })
@@ -16,7 +16,7 @@ const getStyle = (req, res) => {
 const insertStyle = (req, res) => {
   const style = req.body;
 
-  models.WebsiteStyleManager.insertStyle(style)
+  models.websitestyle.insertStyle(style)
     .then((results) => {
       if (results[0]);
 
@@ -34,7 +34,7 @@ const insertStyle = (req, res) => {
 const updateStyle = (req, res) => {
   const style = req.body;
 
-  models.WebsiteStyleManager.updateStyle(style)
+  models.websitestyle.updateStyle(style)
     .then(([result]) => {
       if (result.affectedRows === 0) res.sendStatus(404);
       else res.status(202).send({ style });
@@ -49,7 +49,7 @@ const updateStyle = (req, res) => {
 const deleteStyle = (req, res) => {
   const { id } = req.params;
 
-  models.WebsiteStyleManager.deleteStyleById(id)
+  models.websitestyle.deleteStyleById(id)
     .then(() => {
       res.sendStatus(204);
     })

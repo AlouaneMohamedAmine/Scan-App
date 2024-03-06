@@ -4,7 +4,7 @@ const models = require("../models");
 const addFavorite = (req, res) => {
   const favorite = req.body;
 
-  models.UserLibrary.insertFav(favorite)
+  models.userlibrary.insertFav(favorite)
     .then((results) => {
       if (results[0]);
 
@@ -21,7 +21,7 @@ const addFavorite = (req, res) => {
 // Récupère les favoris
 const getFavs = (req, res) => {
   const { userId } = req.params;
-  models.UserLibrary.findFavs(userId)
+  models.userlibrary.findFavs(userId)
     .then(([results]) => {
       res.send(results);
     })
@@ -34,7 +34,7 @@ const getFavs = (req, res) => {
 // Supprime un favori
 const deleteFavorite = (req, res) => {
   const { userId, manwhaId } = req.params;
-  models.UserLibrary.deleteFav(userId, manwhaId)
+  models.userlibrary.deleteFav(userId, manwhaId)
     .then(() => {
       res.sendStatus(204);
     })

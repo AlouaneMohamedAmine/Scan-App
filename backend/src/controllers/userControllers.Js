@@ -1,7 +1,7 @@
 const models = require("../models");
 
 const browse = (req, res) => {
-  models.user
+  models.users
     .findAll()
     .then(([results]) => {
       res.send(results);
@@ -15,25 +15,24 @@ const browse = (req, res) => {
 const read = (req, res) => {
   const { id } = req.params;
 
-  models.user
+  models.users
     .find(id)
     .then(([results]) => {
       if (results[0]) res.send(results[0]);
-      else res.sendStatus(404);
+      else res.json({ status: "success" }).sendStatus(201);
     })
     .catch((error) => {
       console.error(error);
-      res.sendStatus(500);
+      res.json({ status: "failed" }).sendStatus(500);
     });
 };
 
 const add = (req, res) => {
   const user = req.body;
-
-  models.user
+  models.users
     .insert(user)
     .then(([result]) => {
-      res.location(`/api/users/${result.insertId}`).sendStatus(201);
+      res.json({ status: "success" }).sendStatus(201);
     })
     .catch((error) => {
       console.error(error);
@@ -45,7 +44,7 @@ const edit = (req, res) => {
   const user = req.body;
   user.id = parseInt(req.params.id, 10);
 
-  models.user
+  models.users
     .update(user)
     .then(([result]) => {
       if (result.affectedRows === 0) res.sendStatus(404);
@@ -59,7 +58,7 @@ const edit = (req, res) => {
 
 const destroy = (req, res) => {
   const { id } = req.params;
-  models.user
+  models.users
     .delete(id)
     .then(([result]) => {
       if (result.affectedRows === 0) res.sendStatus(404);

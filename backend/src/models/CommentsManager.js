@@ -2,7 +2,7 @@ const AbstractManager = require("./AbstractManager");
 
 class CommentsManager extends AbstractManager {
   constructor() {
-    super({ table: "Comments" });
+    super({ table: "comments" });
   }
 
   getComments(chapterId) {

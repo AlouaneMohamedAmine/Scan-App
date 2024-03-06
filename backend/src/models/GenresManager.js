@@ -6,7 +6,8 @@ class GenresManager extends AbstractManager {
   }
 
   findAll() {
-    return this.connection.query(`select * from  ${this.table}`);
+    console.log(this.connection);
+    return this.connection.query(`select * from  ${this.table};`);
   }
 
   insert(genres) {

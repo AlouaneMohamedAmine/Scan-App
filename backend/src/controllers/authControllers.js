@@ -2,7 +2,7 @@ const models = require("../models");
 
 const getUserByEmailWithPasswordAndPassToNext = (req, res, next) => {
   const { email } = req.body;
-  models.user
+  models.users
     .findByEmailWithPassword(email)
     .then(([users]) => {
       if (users[0]) {
