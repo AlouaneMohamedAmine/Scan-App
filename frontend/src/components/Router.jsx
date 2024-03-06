@@ -2,7 +2,7 @@ import {BrowserRouter, Routes, Route } from "react-router-dom";
  
 // Imported
 import Home from "../pages/Home";
-import Library from "../pages/Library";
+import LibraryPage from "../pages/LibraryPage";
 import ProfilePage from "../pages/ProfilePage";
 import WebtoonPage from "../pages/WebtoonPage";
 import ChapterPage from "../pages/ChapterPage";
@@ -18,7 +18,7 @@ const allRoutes = [
       { path: "/browse", component: <Browse />},
       { path: "/webtoon", component: <WebtoonPage />},
       { path: "/webtoonname/chapter", component: <ChapterPage />},
-      { path: "/profile/library", component: <Library />},
+      { path: "/profile/library", component: <LibraryPage />},
       { path: "/profile", component: <ProfilePage />},
       { path: "/about", component: <About />},
       { path: "/*", component: <ErrorPage />},

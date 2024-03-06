@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
+import SearchBar from './SearchBar';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,20 +14,22 @@ function Navbar() {
             <a className="text-white no-underline hover:text-white hover:no-underline" href="#">
               <img className="w-8 h-8 mr-2 ml-2" src="https://www.svgrepo.com/show/414876/book-education-library-2.svg" alt="logo"/>
             </a>
+            
             <button className="navbar-burger flex items-center text-white md:hidden" onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? <XIcon className="h-6 w-6" /> : <MenuIcon className="h-6 w-6" />}
             </button>
           </div>
           <div className={`w-full md:w-1/2 block flex-grow md:flex md:items-center mt-2 md:mt-0 bg-gray-800 z-30 ${isOpen ? 'block visible' : 'hidden'}`} id="nav-content">
+          <SearchBar/>
             <ul className="list-reset md:flex justify-end flex-1 items-center">
               <li className="mr-3">
-                <a className="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="#">Home</a>
+                <a className="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="/">Home</a>
               </li>
               <li className="mr-3">
-                <a className="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="#">BookMarks</a>
+                <a className="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="/profile/library">BookMarks</a>
               </li>
               <li className="mr-3">
-                <a className="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="#">Comics</a>
+                <a className="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="/browse">Comics</a>
               </li>
               <li className="mr-3">
                 <a className="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="/about">About us</a>
