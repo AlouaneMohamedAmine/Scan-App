@@ -20,11 +20,16 @@ const logoDirectory = process.env.LOGO_DIRECTORY || "public/uploads/logo/";
 
 //////////////////////////////////////////////////////////////// Chapitres ////////////////////////////////////////////////
 
-// Gestion des chapitres
-const renameChapter = (req, res, next) => {
+// Fonction pour insérer un nouveau chapitre
+const insertChapter = (req, res, next) => {
+  // Récupération du nom original et du nom temporaire du fichier
   const { originalname } = req.file;
   const { filename } = req.file;
+
+  // Génération d'un identifiant unique pour le fichier
   const uuid = uuidv4();
+
+  // Renommage du fichier avec l'identifiant unique
   fs.rename(
     `${chapterDirectory}${filename}`,
     `${chapterDirectory}${uuid}-${originalname}`,
@@ -34,49 +39,134 @@ const renameChapter = (req, res, next) => {
       next();
     }
   );
-};
-// Envoie le chapitre
-const sendChapter = (req, res) => {
-  const { fileName } = req.params;
-  res.download(chapterDirectory + fileName, fileName, (err) => {
-    if (err) {
-      res.status(404).send({
-        message: `Chapter not found.`,
-      });
-    }
+
+  // Récupération de work_id et views de req.body
+  const { work_id, views } = req.body;
+
+  // Insertion du chapitre avec work_id et views dans la base de données
+  ChaptersManager.insertChapter({
+    chapter: req.chapter,
+    work_id: work_id,
+    views: views
+  })
+  .then(() => {
+    res.sendStatus(200);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.sendStatus(500);
   });
 };
 
-// Met à jour le chapitre
+// Fonction pour mettre à jour un chapitre existant
 const updateChapter = (req, res, next) => {
-    const { originalname } = req.file;
-    const { filename } = req.file;
-    const uuid = uuidv4();
-    fs.rename(
-      `${chapterDirectory}${filename}`,
-      `${chapterDirectory}${uuid}-${originalname}`,
-      (err) => {
-        if (err) throw err;
-        req.chapter = `${uuid}-${originalname}`;
-        next();
-      }
-    );
+  // Récupération du nom original et du nom temporaire du fichier
+  const { originalname } = req.file;
+  const { filename } = req.file;
+
+  // Génération d'un identifiant unique pour le fichier
+  const uuid = uuidv4();
+
+  // Renommage du fichier avec l'identifiant unique
+  fs.rename(
+    `${chapterDirectory}${filename}`,
+    `${chapterDirectory}${uuid}-${originalname}`,
+    (err) => {
+      if (err) throw err;
+      req.chapter = `${uuid}-${originalname}`;
+      next();
+    }
+  );
+
+  // Récupération de work_id et views de req.body
+  const { work_id, views } = req.body;
+
+  // Mise à jour du chapitre avec work_id et views dans la base de données
+  ChaptersManager.updateChapter({
+    chapter: req.chapter,
+    work_id: work_id,
+    views: views
+  })
+  .then(() => {
+    res.sendStatus(200);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.sendStatus(500);
+  });
 };
 
-// Supprime le chapitre
+// Fonction pour supprimer un chapitre
 const deleteChapter = (req, res) => {
+  // Récupération du nom du fichier à supprimer
   const { fileName } = req.params;
+
+  // Suppression du fichier
   fs.unlink(`${chapterDirectory}${fileName}`, (err) => {
     if (err) {
       console.error(err);
       res.sendStatus(500);
     } else {
-      res.sendStatus(200);
+      // Suppression du chapitre de la base de données
+      ChaptersManager.deleteChapter(fileName.replace(/.*-/, ''))
+      .then(() => {
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
     }
   });
 };
 
+// Renvoie les chapitres les plus vus aujourd'hui
+const mostViewedToday = (req, res) => {
+  ChaptersManager.getMostViewedToday()
+    .then(([results]) => {
+      res.send(results);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
 
+// Renvoie les chapitres les plus vus cette semaine
+const mostViewedWeek = (req, res) => {
+  ChaptersManager.getMostViewedWeek()
+    .then(([results]) => {
+      res.send(results);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+// Renvoie les chapitres les plus vus ce mois
+const mostViewedMonth = (req, res) => {
+  ChaptersManager.getMostViewedMonth()
+    .then(([results]) => {
+      res.send(results);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+// Renvoie les chapitres les plus aimés
+const mostLiked = (req, res) => {
+  ChaptersManager.getMostLiked()
+    .then(([results]) => {
+      res.send(results);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
 
 
 
@@ -272,11 +362,11 @@ const updateCoverImage = (req, res) => {
 module.exports = {
   renameLogo,
   renameCoverImage,
-  renameChapter,
+  insertChapter,
   renameAvatar,
   sendLogo,
   sendCoverImage,
-  sendChapter,
+  updateChapter,
   updateLogo,
   sendAvatar,
   updateAvatar,
@@ -285,4 +375,8 @@ module.exports = {
   deleteCoverImage,
   deleteAvatar,
   deleteChapter,
+  mostViewedToday,
+  mostLiked,
+  mostViewedWeek,
+  mostViewedMonth
 };

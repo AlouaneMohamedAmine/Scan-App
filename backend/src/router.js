@@ -64,9 +64,13 @@ router.delete('/api/manhwas/:id', verifyToken, manhwaControllers.destroy);
 
 // Gestion des chapitres
 
-router.post("/api/chapter/rename", verifyToken, uploadChapter.single('chapter'), fileControllers.renameChapter);
-router.get("/api/chapter/:fileName", fileControllers.sendChapter);
+router.post("/api/chapter/rename", verifyToken, uploadChapter.single('chapter'), fileControllers.insertChapter);
+router.get("/api/chapter/:fileName", fileControllers.updateChapter);
 router.delete("/api/chapter/:fileName", verifyToken, fileControllers.deleteChapter);
+router.get('/api/chapters/most-viewed-today', fileControllers.mostViewedToday);
+router.get('/api/chapters/most-viewed-week', fileControllers.mostViewedWeek);
+router.get('/api/chapters/most-viewed-month', fileControllers.mostViewedMonth);
+router.get('/api/chapters/most-liked', fileControllers.mostLiked);
 
 // Gestion des genres
 
