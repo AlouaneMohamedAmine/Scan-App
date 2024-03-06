@@ -44,7 +44,7 @@ const insertChapter = (req, res, next) => {
   const { work_id, views } = req.body;
 
   // Insertion du chapitre avec work_id et views dans la base de données
-  ChaptersManager.insertChapter({
+  chapters.insertChapter({
     chapter: req.chapter,
     work_id: work_id,
     views: views
@@ -82,7 +82,7 @@ const updateChapter = (req, res, next) => {
   const { work_id, views } = req.body;
 
   // Mise à jour du chapitre avec work_id et views dans la base de données
-  ChaptersManager.updateChapter({
+  chapters.updateChapter({
     chapter: req.chapter,
     work_id: work_id,
     views: views
@@ -108,7 +108,7 @@ const deleteChapter = (req, res) => {
       res.sendStatus(500);
     } else {
       // Suppression du chapitre de la base de données
-      ChaptersManager.deleteChapter(fileName.replace(/.*-/, ''))
+      chapters.deleteChapter(fileName.replace(/.*-/, ''))
       .then(() => {
         res.sendStatus(200);
       })
@@ -122,7 +122,7 @@ const deleteChapter = (req, res) => {
 
 // Renvoie les chapitres les plus vus aujourd'hui
 const mostViewedToday = (req, res) => {
-  ChaptersManager.getMostViewedToday()
+  chapters.getMostViewedToday()
     .then(([results]) => {
       res.send(results);
     })
@@ -134,7 +134,7 @@ const mostViewedToday = (req, res) => {
 
 // Renvoie les chapitres les plus vus cette semaine
 const mostViewedWeek = (req, res) => {
-  ChaptersManager.getMostViewedWeek()
+  chapters.getMostViewedWeek()
     .then(([results]) => {
       res.send(results);
     })
@@ -146,7 +146,7 @@ const mostViewedWeek = (req, res) => {
 
 // Renvoie les chapitres les plus vus ce mois
 const mostViewedMonth = (req, res) => {
-  ChaptersManager.getMostViewedMonth()
+  chapters.getMostViewedMonth()
     .then(([results]) => {
       res.send(results);
     })
@@ -158,7 +158,7 @@ const mostViewedMonth = (req, res) => {
 
 // Renvoie les chapitres les plus aimés
 const mostLiked = (req, res) => {
-  ChaptersManager.getMostLiked()
+  chapters.getMostLiked()
     .then(([results]) => {
       res.send(results);
     })
@@ -209,7 +209,7 @@ const updateLogo = (req, res) => {
   // Met à jour le logo dans la base de données
   const id = req.payloads.sub;
   const { logo } = req;
-  models.WebsiteStyleManager.updateLogo(id, logo)
+  models.websitestyle.updateLogo(id, logo)
     .then(([result]) => {
       if (result.affectedRows === 0) res.sendStatus(404);
       else res.status(202).send({ logo });
@@ -268,7 +268,7 @@ const sendAvatar = (req, res) => {
 const updateAvatar = (req, res) => {
   const id = req.payloads.sub;
   const { avatar } = req;
-  models.user
+  models.users
     .updateAvatar(id, avatar)
     .then(([result]) => {
       if (result.affectedRows === 0) res.sendStatus(404);

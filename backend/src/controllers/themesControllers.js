@@ -3,7 +3,7 @@ const models = require("../models");
 // Récupère tous les thèmes
 const getAllThemes = (req, res) => {
   // Utilise le modèle pour récupérer tous les thèmes de la base de données
-  models.ThemesManager.findAll()
+  models.themes.findAll()
     .then(([results]) => {
       // Envoie les résultats au client
       res.send(results);
@@ -21,7 +21,7 @@ const insertTheme = (req, res) => {
   const theme = req.body;
 
   // Utilise le modèle pour insérer le thème dans la base de données
-  models.ThemesManager.insert(theme)
+  models.themes.insert(theme)
     .then((results) => {
       if (results[0]);
 
@@ -43,7 +43,7 @@ const updateTheme = (req, res) => {
   const theme = req.body;
 
   // Utilise le modèle pour mettre à jour le thème dans la base de données
-  models.ThemesManager.update(theme)
+  models.themes.update(theme)
     .then(([result]) => {
       if (result.affectedRows === 0) res.sendStatus(404);
       else res.status(202).send({ theme });
@@ -61,7 +61,7 @@ const deleteTheme = (req, res) => {
   const { id } = req.params;
 
   // Utilise le modèle pour supprimer le thème de la base de données
-  models.ThemesManager.deleteThemeById(id)
+  models.themes.deleteThemeById(id)
     .then(() => {
       // Envoie une réponse de succès au client
       res.sendStatus(204);

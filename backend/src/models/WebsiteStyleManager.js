@@ -2,7 +2,7 @@ const AbstractManager = require("./AbstractManager");
 
 class WebsiteStyleManager extends AbstractManager {
   constructor() {
-    super({ table: "WebsiteStyle" });
+    super({ table: "websitestyle" });
   }
 
   getStyle() {

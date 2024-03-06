@@ -75,7 +75,7 @@ router.get('/api/chapters/most-liked', fileControllers.mostLiked);
 // Gestion des genres
 
 router.get('/api/genres', genresControllers.getAllGenres);
-router.post('/api/genres', verifyToken, genresControllers.insertGenre);
+router.post('/api/genres', /*verifyToken,*/ genresControllers.insertGenre);
 router.put('/api/genres/:id', verifyToken, genresControllers.updateGenre);
 router.delete('/api/genres/:id', verifyToken, genresControllers.deleteGenre);
 

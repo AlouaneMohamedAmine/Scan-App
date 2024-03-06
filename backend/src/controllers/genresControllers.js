@@ -3,7 +3,7 @@ const models = require("../models");
 // Récupère tous les genres
 const getAllGenres = (req, res) => {
   // Utilise le modèle pour récupérer tous les genres de la base de données
-  models.GenresManager.findAll()
+  models.genres.findAll()
     .then(([results]) => {
       // Envoie les résultats au client
       res.send(results);
@@ -21,7 +21,7 @@ const insertGenre = (req, res) => {
   const genre = req.body;
 
   // Utilise le modèle pour insérer le genre dans la base de données
-  models.GenresManager.insert(genre)
+  models.genres.insert(genre)
     .then((results) => {
       if (results[0]);
 
@@ -43,7 +43,7 @@ const updateGenre = (req, res) => {
   const genre = req.body;
 
   // Utilise le modèle pour mettre à jour le genre dans la base de données
-  models.GenresManager.update(genre)
+  models.genres.update(genre)
     .then(([result]) => {
       if (result.affectedRows === 0) res.sendStatus(404);
       else res.status(202).send({ genre });
@@ -61,7 +61,7 @@ const deleteGenre = (req, res) => {
   const { id } = req.params;
 
   // Utilise le modèle pour supprimer le genre de la base de données
-  models.GenresManager.deleteGenreById(id)
+  models.genres.deleteGenreById(id)
     .then(() => {
       // Envoie une réponse de succès au client
       res.sendStatus(204);

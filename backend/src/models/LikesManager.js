@@ -2,7 +2,7 @@ const AbstractManager = require("./AbstractManager");
 
 class LikesManager extends AbstractManager {
   constructor() {
-    super({ table: "Likes" });
+    super({ table: "likes" });
   }
 
   getLikes(chapterId) {
