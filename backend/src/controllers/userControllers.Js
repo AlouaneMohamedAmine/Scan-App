@@ -32,7 +32,7 @@ const add = (req, res) => {
   models.users
     .insert(user)
     .then(([result]) => {
-      res.json({ status: "success" }).sendStatus(201);
+      res.status(201).json({ status: "success" });
     })
     .catch((error) => {
       console.error(error);

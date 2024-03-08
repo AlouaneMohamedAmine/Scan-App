@@ -5,7 +5,7 @@ const getUserByEmailWithPasswordAndPassToNext = (req, res, next) => {
   models.users
     .findByEmailWithPassword(email)
     .then(([users]) => {
-      if (users[0]) {
+      if (users.length > 0) {
         [req.user] = users;
         next();
       } else res.sendStatus(401);
@@ -15,6 +15,7 @@ const getUserByEmailWithPasswordAndPassToNext = (req, res, next) => {
       res.sendStatus(500);
     });
 };
+
 
 module.exports = {
   getUserByEmailWithPasswordAndPassToNext,
